@@ -1,9 +1,3 @@
-from pytubefix import YouTube
-from pytubefix.cli import on_progress
+from audio.audio import get_audio_file, convert_m4a_wav
 
-url = "https://www.youtube.com/watch?v=PGUdWfB8nLg"
-
-yt = YouTube(url, on_progress_callback=on_progress)
-
-caption = yt.captions['a.en']
-caption.save_captions("captions.txt")
+get_audio_file("https://www.youtube.com/watch?v=FAyKDaXEAgc")
