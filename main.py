@@ -1,3 +1,3 @@
-from audio.audio import get_audio_file, convert_m4a_wav
-
-get_audio_file("https://www.youtube.com/watch?v=FAyKDaXEAgc")
+from audio.subtitles import get_subtitles
+teste = get_subtitles("https://www.youtube.com/watch?v=EXOxGXe09GI")
+print(teste)
