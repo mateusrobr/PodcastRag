@@ -6,12 +6,20 @@ import re
 
 
 
-def get_subtitles(url,caption_code):
+def get_subtitles(url,caption_code="a.en"):
     yt = YouTube(url,on_progress_callback=on_progress)
+    title = yt.title
+    channel_id = yt.channel_url
     captions = yt.captions[caption_code]
-
+    print(captions.code)
     srt_subtitles = captions.generate_srt_captions()
-    return srt_subtitles
+
+    podcast_dict = {}
+    podcast_dict["title"] = title
+    podcast_dict["channel_url"] = channel_id
+    podcast_dict["srt_subtitle"] = srt_subtitles
+
+    return podcast_dict
 
 
 def parse_srt_string(srt_text):

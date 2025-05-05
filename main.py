@@ -1,8 +1,11 @@
 from subtitles.subtitles import get_subtitles,parse_srt_string, group_subtitle_texts
-import re
-teste = get_subtitles("https://www.youtube.com/watch?v=FAyKDaXEAgc", "a.en")
-parsed_srt = parse_srt_string(teste)
+from database.database import initialize_database
 
-all_subs = group_subtitle_texts(parsed_srt)
+from qdrant_client import QdrantClient
 
-print(all_subs)
+from chatbot.chatbot import main_flow
+
+
+
+main_flow()
+#client = initialize_database()
