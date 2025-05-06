@@ -3,7 +3,7 @@ from sentence_transformers import SentenceTransformer
 collection_name = "video_subs"
 
 def initialize_database(url="http://localhost:6333"):
-    client = QdrantClient()
+    client = QdrantClient(url=url)
     encoder = SentenceTransformer("all-MiniLM-L6-v2")
     try:
         client.create_collection(
@@ -19,14 +19,16 @@ def initialize_database(url="http://localhost:6333"):
 
     return client
 
-def add_to_collection(doc, client):
+def add_to_collection(docs, client):
     encoder = SentenceTransformer("all-MiniLM-L6-v2")
+
     client.upload_points(
         collection_name=collection_name,
         points=[
             models.PointStruct(
-                id=1, vector=encoder.encode(doc["srt_subtitle"]).tolist(), payload=doc
+                id=idx, vector=encoder.encode(doc.page_content).tolist(), payload=docs
             )
+            for idx, doc in enumerate(docs["subtitle"])
         ],
     )   
 
